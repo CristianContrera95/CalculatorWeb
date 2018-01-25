@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+</head>
+<body>
+  <div>
+    <div>
+      <div align="right">
+        <table>
+          <tr>
+            <td><a href="{% url 'users:login' %}">Login</a></td>
+            <td><a href="{% url 'users:index' %}">Index</a></td>
+            </tr>
+        </table>      
+      </div>
+    </div>
+    <div align="center">
+      <div>
+        <h3>Register</h3>
+        <h6>* Campos requeridos</h6>
+        <p>{% if error_reg %} {{ error_reg }} {% endif %}</p>
+        <form action="{% url 'users:register' %}" method="post">
+          {% csrf_token %}
+          <div>
+            <div>
+              <label for="{{form2.username.name}}">{{form2.username.label}}</label>
+              {{form2.username}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form2.email.name}}">{{form2.email.label}}</label>
+              {{form2.email}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form2.password.name}}">{{form2.password.label}}</label>
+              {{form2.password}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label>Password (Confirmed)</label>
+              <input type="password" name="password2">
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form2.first_name.name}}">{{form2.first_name.label}}</label>
+              {{form2.first_name}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form2.last_name.name}}">{{form2.last_name.label}}</label>
+              {{form2.last_name}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form.sex.name}}">{{form.sex.label}}</label>
+              {{form.sex}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form.address.name}}">{{form.address.label}}</label>
+              {{form.address}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form.civil_state.name}}">{{form.civil_state.label}}</label>
+              {{form.civil_state}}
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="{{form.ocupation.name}}">{{form.ocupation.label}}</label>
+              {{form.ocupation}}
+            </div>
+          </div>
+          <input type="submit" name="register" value="Register"><br><br>
+        </form>
+      </div>
+      <div>
+        Cristian Contrera
+      </div>
+    </div>
+  </div>
+</body>
+</html>

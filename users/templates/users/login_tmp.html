@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <div>
+    <div align="left">
+      <a href="{% url 'users:index' %}">Index</a>
+    </div>
+    <div align="right">
+      <a href="{% url 'users:register' %}">Register</a>
+    </div>
+    <div>
+      {% if error_msj %}
+        <p>{{ error_msj }}</p>
+      {% endif %}
+    </div>
+    <div align="center">
+      <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        <div>
+          <label><p>User name<p></label>
+          <input type="text" name="username"><br>
+        </div>
+        <div>
+          <label><p>Password<p></label>
+          <input type="password" name="password"><br>
+        </div>
+        <div>
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History-{{ user.username }}-Calculator</title>
+</head>
+<body>
+  <div>
+    <div>
+      <table>
+        <tr>
+          <td><a href="{% url 'calculator:calculator' user.id %}">Calculator</a></td>
+          <td><a href="{% url 'calculator:index' %}"">Index</a></td>
+        </tr> 
+      </table>
+    </div>
+    <div>
+      <h2>{{ user.username }} history:</h2>
+      {% if his_context %}
+      <ul>
+        {% for h in his_context %}
+          <li><p>{{h.count}}: {{h.equation}}</p></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p>History empty</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator-{{user.username}}</title>
+</head>
+<body>
+
+  <div align="center">
+    <div>
+      <form action="{% url 'calculator:calculator' user.id %}" method="get">
+        {% csrf_token %}
+        {% if calculator_type %}
+          <button type="submit" name="calc_type" value="cientific">Cientific Calc</button><br>
+        {% else %}
+          <button type="submit" name="calc_type" value="stand">Stand Calc</button>
+        {% endif %}
+      </form>
+    </div>
+    <div>
+      <form action="{% url 'calculator:calculator' user.id %}" method="post">
+        {% csrf_token %}
+        <br><label>Input calculo:</label><br>
+        <input type="text" name='equation' id='equation' value="{{ new_equation }}" />
+        <div>
+          <table>
+            <tr>
+              <td><button type="submit" name="digit" value="7">7</button></td>
+              <td><button type="submit" name="digit" value="8">8</button></td>
+              <td><button type="submit" name="digit" value="9">9</button></td>
+              <td><button type="submit" name="op" value="+">&plus;</button></td>
+            </tr>
+            <tr>
+              <td><button type="submit" name="digit" value="4">4</button></td>
+              <td><button type="submit" name="digit" value="5">5</button></td>
+              <td><button type="submit" name="digit" value="6">6</button></td>
+              <td><button type="submit" name="op" value="-">&minus;</button></td>
+
+            </tr>
+            <tr>
+              <td><button type="submit" name="digit" value="1">1</button></td>
+              <td><button type="submit" name="digit" value="2">2</button></td>
+              <td><button type="submit" name="digit" value="3">3</button></td>
+              <td><button type="submit" name="op" value="*">&times;</button></td>
+            </tr>
+            <tr>
+              <td><button type="submit" name="op" value=".">.</button></td>
+              <td><button type="submit" name="digit" value="0">0</button></td>
+              <td><button type="submit" name="equals" value="result">&equals;</button></td>
+              <td><button type="submit" name="op" value="/">&divide;</button></td>
+            </tr>
+          </table>
+        </div>
+        <label><label>Result: </label>{{ result }}</label><br>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

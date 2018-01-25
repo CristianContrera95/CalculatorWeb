@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Index</title>
+</head>
+<body>
+  <div>
+    <div>
+      <div align="right">
+        {% if user.isauthenticated %}
+          <p>{{ user.username }}</p>
+        {% else %}
+          <table>
+            <tr>
+              <td><a href="{% url 'users:login' %}">Login</a></td>
+              <td><a href="{% url 'users:register' %}">Register</a></td>
+            </tr>
+          </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div>
+    <div align="center">
+      <h1>Welcome</h1>
+    </div>
+  </div>
+</body>
+</html>

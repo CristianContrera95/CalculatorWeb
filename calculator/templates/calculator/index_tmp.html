@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator-{{ user.username }}</title>
+</head>
+<body>
+  <div>
+    <div>
+      <table>
+        <tr>
+          <td><a href="{% url 'calculator:calculator' user.id %}">Calculator</a></td>
+          <td><a href="{% url 'calculator:history' user.id %}">History</a></td>
+          <td><a href="#">Admin</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div>
+      <p>Last User Conect:</p>
+      {% if ind_context %}
+        <ul>
+          {% for u in ind_context %}
+            <li>{{ u.username }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No user (yet)</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

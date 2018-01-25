@@ -1,0 +1,4 @@
+venv/
+*.pyc
+calculator/migrations/[0-9]*
+users/migrations/[0-9]*
