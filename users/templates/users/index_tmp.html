@@ -7,8 +7,10 @@
   <div>
     <div>
       <div align="right">
-        {% if user.isauthenticated %}
-          <p>{{ user.username }}</p>
+        {% if user.is_authenticated %}
+          <p>{{ user }}</p>
+          <p><a href="{% url 'users:logout' %}">Logout</a></p>
+          <p><a href="{% url 'users:profile' user.pk %}">Profile</a></p>
         {% else %}
           <table>
             <tr>

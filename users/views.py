@@ -4,11 +4,18 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.views.generic import RedirectView, TemplateView, CreateView
+from django.views.generic import TemplateView
+from django.views.generic.edit import  FormView
+from django.views.generic.detail import  DetailView
 from django.core.urlresolvers import reverse_lazy
 
 from .models import ProfileMd
 from .forms import ProfileFm, UserFm
+
+
+def logoutView(request):
+  logout(request)
+  return redirect('index/')
 
 
 class LoginView(TemplateView):
@@ -20,7 +27,6 @@ class LoginView(TemplateView):
     password = request.POST.get('password')
     user = authenticate(request, username=username, password=password)
     if user is not None:
-      print 'user'
       login(request, user)
       return redirect('index/')
     else:
@@ -29,17 +35,8 @@ class LoginView(TemplateView):
       }
       return render(request, self.template_name, context=log_context)
 
-  def get(self, request, *args, **kwargs):
-    return render(request, self.template_name)
 
-
-
-def logoutView(request):
-  logout(request)
-  return redirect('index/')
-
-
-class RegisterView(CreateView):
+class RegisterView(FormView):
   model = ProfileFm
   form_class = ProfileFm
   second_form_class = UserFm
@@ -57,33 +54,34 @@ class RegisterView(CreateView):
 
   def post(self, request, *args, **kwargs):
     error_reg = None
-    self.object = self.get_object
-    form = self.form_class(request.POST)
-    form2 = self.second_form_class(request.POST)
-    if form.is_valid() and form2.is_valid():
-      password = request.POST.get('password2')
-      if password == form2.cleaned_data['password']:
-        profile = form.save(commit=False) #wait save a form2 save
-        profile.user = form2.save()
+    form_prof = ProfileFm(request.POST)
+    form_user = UserFm(request.POST)
+    if form_prof.is_valid() and form_user.is_valid():
+      password = request.POST.get('password')
+      if password == request.POST.get('password2'):
+        profile = form_prof.save(commit=False)
+        user = form_user.save()
+        user.set_password(password)
+        profile.user = user
+        user.save()
         profile.save()
         return redirect(self.success_url)
       error_reg = 'Passwords are no equals'
     else:
       error_reg = 'Data Error'
 
-    reg_context = self.get_context_data(form=form, form2=form2)
+    reg_context = self.get_context_data(form=form_prof, form2=form_user)
     reg_context['error_reg'] = error_reg
     return render(request, self.template_name, reg_context)
 
-
-def auth(request):
-  pass
-
-
+  
 class IndexView(TemplateView):
   template_name = 'users/index_tmp.html'
 
 
-def profile(request):
-  pass
+class ProfileView(DetailView):
+  model = ProfileMd
+  template_name = 'users/profile_tmp.html'
+  context_object_name = 'pro_context'
+
 

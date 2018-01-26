@@ -40,22 +40,16 @@ class UserFm(ModelForm):
       'email',
       'first_name',
       'last_name',
-      'password',
-     # 'password2',
     ]
     labels = {
       'username': 'User name',
       'email': 'Email',
       'first_name': 'First name',
       'last_name': 'Last name',
-      'password': 'Password',
-    #  'password2': 'Password (Confirmed)',
     }
     widgets = {
       'username': TextInput(attrs={'type':'text', 'max_length':'64'}),
       'email': TextInput(attrs={'type':'email', 'max_length':'64'}),
       'first_name': TextInput(attrs={'type':'text', 'max_length':'64'}),
       'last_name': TextInput(attrs={'type':'text', 'max_length':'64'}),
-      'password': TextInput(attrs={'type':'password', 'max_length':'64'}),
-    #  'password2': TextInput(attrs={'type':'password', 'max_length':'64'}),
     }

@@ -4,6 +4,15 @@
   <title>Calculator-{{user.username}}</title>
 </head>
 <body>
+  <div>
+    <div>
+      <div align="right">
+        <a href="{% url 'calculator:history' user.pk %}">History</a>
+        <a href="{% url 'calculator:index' %}">Index</a>
+
+      </div>
+    </div>
+  </div>
 
   <div align="center">
     <div>

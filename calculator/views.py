@@ -14,13 +14,13 @@ from math import *
 
 
 BASIC_OP = '+-*/()'
-
+BADSIMBOLS = '_|¬$\"\\&\{\}[]´¨^\''
+LETTER = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 @method_decorator(require_http_methods(['GET']), name='dispatch')
 class IndexView(ListView):
   template_name = 'calculator/index_tmp.html'
   context_object_name = 'ind_context'
-  pk_url_kwarg = 'user_id'
 
   def get_context_data(self, *args, **kwargs):
     context = super(IndexView, self).get_context_data(**kwargs)
@@ -35,11 +35,10 @@ class IndexView(ListView):
 class CalculatorView(TemplateView):
   template_name = 'calculator/calculator_tmp.html'
   context_object_name = 'cal_context'
-  pk_url_kwarg = 'user_id'
 
   def get(self, request, *args, **kwargs):
     context = {
-      'user': User.objects.get(id=self.kwargs.get('user_id')),
+      'user': User.objects.get(pk=self.kwargs.get('pk')),
       'equation': '0',
       'result': '0',
     }
@@ -61,15 +60,18 @@ class CalculatorView(TemplateView):
     equals = request.POST.get('equals')
     if equals:
       try:
+        for s in BADSIMBOLS+LETTER:
+          if s in equation:
+            raise SyntaxError
         result = str(eval(equation))
-      except SyntaxError, TypeError:
+      except (SyntaxError, TypeError, NameError):
         result = 'Equation bad formed'
-      except ValueError:
+      except (ValueError, ZeroDivisionError):
         result = 'NaN'
     return (new_equation, result)
 
   def post(self, request, *args, **kwargs):
-    user = User.objects.get(id=self.kwargs.get('user_id'))
+    user = User.objects.get(pk=self.kwargs.get('pk'))
 
     (new_equation, result) = self.make_equation(request)
     if result != '0':
@@ -90,14 +92,13 @@ class HistoryView(ListView):
   model = HistoryMd
   template_name = 'calculator/history_tmp.html'
   context_object_name = 'his_context'
-  pk_url_kwarg = 'user_id'
 
   def get_context_data(self, *args, **kwargs):
     context = super(HistoryView, self).get_context_data(**kwargs)
     return context
 
   def get_queryset(self, **kwargs):
-    user = User.objects.get(id=self.kwargs.get('user_id'))
+    user = User.objects.get(pk=self.kwargs.get('pk'))
     his_queryset = HistoryMd.objects.filter(user=user)
     return his_queryset
 

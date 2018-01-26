@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile {{ pro_context.user }}</title>
+</head>
+<body>
+  <div>
+    <div>
+      <div align="right">
+        <p><a href="{% url 'users:index' %}">Index</a></p>
+        <p><a href="{% url 'users:logout' %}">Logout</a></p>
+        <p><a href="{% url 'calculator:history' user.id %}">Calculator - History</a></p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div align="center">
+        <p>Profile {{pro_context.user }}:</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div align="center">
+      {% if pro_context %}
+        <table>
+          <tr><td>Sex:</td>
+              <td>{{ pro_context.sex }}</td></tr>
+          <tr><td>Address:</td>
+              <td>{{ pro_context.address }}</td></tr>
+          <tr><td>Civil Status:</td>
+              <td>{{ pro_context.civil_state }}</td></tr>
+          <tr><td>Ocupation:</td>
+              <td>{{ pro_context.ocupation }}</td></tr>
+        </table>
+      {% else %}
+        <p>No data in profile</p>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

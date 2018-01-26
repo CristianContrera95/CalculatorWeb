@@ -10,6 +10,8 @@
         <tr>
           <td><a href="{% url 'calculator:calculator' user.id %}">Calculator</a></td>
           <td><a href="{% url 'calculator:index' %}"">Index</a></td>
+          <td><a href="{% url 'users:profile' user.pk %}"">Profile</a></td>
+
         </tr> 
       </table>
     </div>
