@@ -79,13 +79,9 @@ WSGI_APPLICATION = 'webproy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'webproy',
-        'USER': 'cristian',
-        'PASSWORD': 'chiqui95',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }|
 }
 
 
