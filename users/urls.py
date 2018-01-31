@@ -4,6 +4,7 @@ from .views import LoginView, RegisterView, IndexView, ProfileView, logoutView
 app_name = 'users'
 # machea en orden la lista y para el primero
 urlpatterns = [
+  url(r'^$', IndexView.as_view(), name='index'),
   url(r'^index/', IndexView.as_view(), name='index'),
   url(r'^login', LoginView.as_view(), name='login'),
   url(r'^logout$', logoutView, name='logout'),

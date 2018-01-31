@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+</head>
+<body>
+  <div>
+    <div>
+      <a href="{% url 'numerical:roots' %}">Back</a>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <ul>
+        {% for r in result %}
+          <li>{{ r }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

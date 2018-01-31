@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roots of Functions</title>
+</head>
+<body>
+  <div>
+    <div>
+      <div>
+        <a href="#"></a><br>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div align="center">
+        <form action="{% url 'numerical:roots' %}", method="post">
+        {% csrf_token %}
+          {% if method is None %}
+ 
+            <label>Method</label><br>
+            <select name="opcMethod">
+              <option value="bisection" selected="1">Bisection</option>
+              <option value="newton">Newton</option>
+              <option value="ipf">Ipf</option>
+            </select><br>
+
+          {% else  %}
+
+            <label>Method</label><br>
+            <input type="text" name="selMethod" value="{{ meth }}"><br>
+            <label>Function</label><br>
+            <input type="text" name="function" required><br>
+
+            {% for arg in parameters %}
+
+              <label>{{ arg }}</label><br>
+              <input type="text" name="{{ arg }}" required><br>
+
+            {% endfor%}
+          {% endif %}
+          <br><input type="submit" name="ok">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

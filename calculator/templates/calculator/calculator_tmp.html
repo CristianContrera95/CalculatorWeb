@@ -29,7 +29,7 @@
       <form action="{% url 'calculator:calculator' user.id %}" method="post">
         {% csrf_token %}
         <br><label>Input calculo:</label><br>
-        <input type="text" name='equation' id='equation' value="{{ new_equation }}" />
+        <input type="text" name='equation' id='equation' value="{{ new_equation }}" maxlength="30"/>
         <div>
           <table>
             <tr>

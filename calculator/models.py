@@ -10,7 +10,7 @@ class HistoryMd(md.Model):
   """docstring for HistoryMd"""
   user = md.ForeignKey(User, on_delete=md.CASCADE)
   count = md.IntegerField()
-  equation = md.CharField(max_length=20, null=False)
+  equation = md.CharField(max_length=31, null=False)
 
   def __str__(self):
     return str(str(self.count)+': '+self.equation)

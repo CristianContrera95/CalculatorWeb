@@ -2,3 +2,6 @@ venv/
 *.pyc
 calculator/migrations/[0-9]*
 users/migrations/[0-9]*
+numerical/migrations/[0-9]*
+numerical/octaveFuncs/*.pyc
+octave*

@@ -14,8 +14,23 @@ from math import *
 
 
 BASIC_OP = '+-*/()'
-BADSIMBOLS = '_|¬$\"\\&\{\}[]´¨^\''
+BADSIMBOLS = '_|¬$\"\\&\{\}[]´¨^\'\n=\r'
 LETTER = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
+def evalFunction(function, digits=5):
+  try:
+    for s in BADSIMBOLS:
+      if s in function:
+        return 'Equation bad formed'
+    function = 'lambda :{}'.format(function)
+    lambda_fun = eval(function)
+    result = lambda_fun()
+    return str(result)
+  except Exception:
+    print 'Error eval {} con {}'.format(function, args)
+    raise 
+
 
 @method_decorator(require_http_methods(['GET']), name='dispatch')
 class IndexView(ListView):
@@ -63,7 +78,7 @@ class CalculatorView(TemplateView):
         for s in BADSIMBOLS+LETTER:
           if s in equation:
             raise SyntaxError
-        result = str(eval(equation))
+        result = evalFunction(equation)
       except (SyntaxError, TypeError, NameError):
         result = 'Equation bad formed'
       except (ValueError, ZeroDivisionError):
