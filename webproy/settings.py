@@ -27,13 +27,14 @@ SECRET_KEY = 'c#qn!t9e(=c5jv5nph0ea+%=2x5i!nnukrf5p@0$223u$^*o0v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost','192.168.0.107', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'numerical.apps.NumericalConfig',
     'calculator.apps.CalculatorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
